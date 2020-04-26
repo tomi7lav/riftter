@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var { getDbClient } = require('../db');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json({ users: ['Flavio', 'Maggio', 'Cuomo'] });
+router.get('/', function(req, res) {
+  let dbClient = getDbClient();
+
+  dbClient.query('SELECT * FROM weather', (err, dbRes) => {
+    console.log('requesting stuf yaaay', dbRes)
+    res.json({ users: dbRes.rows });
+  });
 });
 
 module.exports = router;
