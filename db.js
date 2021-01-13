@@ -1,24 +1,27 @@
-const { Client } = require('pg')
+const { Pool } = require('pg')
 
-let dbClient = null;
-
-const initializeDb = () => {
-    if(!dbClient) {
-        dbClient = new Client({
-            user: '',
-            host: 'localhost',
-            database: 'mydb',
-            password: 'secretpassword',
-            port: 5432,
-        })
-        dbClient.connect()
-        console.log('creating db client yaaay')
-    }
-}
-
-const getDbClient = () => dbClient;
+const pool = new Pool({
+    host: 'localhost',
+    port: 5432,
+    user: 'tomi7lav',
+    database: 'riftterdb'
+});
 
 module.exports = {
-    initializeDb: initializeDb,
-    getDbClient: getDbClient
-};
+    query: (text, params) => {
+        return new Promise((resolve, reject) => {
+            const start = Date.now()
+            
+            pool.query(text, params, (err, res) => {
+              const duration = Date.now() - start;
+              console.log('executed query', { text, duration, rows: res && res.rowCount })
+
+              if(err) {
+                  reject(err)
+              } else {
+                  resolve(res);
+              }
+            })
+        })
+    },
+  }
