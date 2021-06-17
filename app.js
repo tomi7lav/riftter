@@ -19,7 +19,7 @@ var dbClient = require('./db');
 var app = express();
 
 let RedisStore = require('connect-redis')(session)
-let client = redis.createClient();
+let client = redis.createClient({ host: 'redisdb', port: 6379 });
 
 app.use(function(req, res, next) {
   

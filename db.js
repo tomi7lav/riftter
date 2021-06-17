@@ -1,9 +1,10 @@
 const { Pool } = require('pg')
 
 const pool = new Pool({
-    host: 'localhost',
+    host: 'riftterdb',
     port: 5432,
-    user: 'tomi7lav',
+    user: 'docker',
+    password: 'secret',
     database: 'riftterdb'
 });
 
