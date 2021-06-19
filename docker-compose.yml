@@ -6,6 +6,9 @@ services:
       - "3000:3000"
     depends_on:
       - riftterdb
+    volumes: 
+      - .:/usr/src/app
+      - /usr/src/app/node_modules/
   riftterdb:
     build: ./postgresDb/
     ports: 

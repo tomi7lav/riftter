@@ -8,23 +8,6 @@ router.get('/', async (res) => {
   res.json({ users: response.rows })
 })
 
-router.post('/', async (req, res) => {
-  if (!req.body.name || !req.body.surname || !req.body.username || !req.body.password) {
-    res.status(400).send('All user fields should be filled')
-  }
-
-  const queryText = 'INSERT INTO users(name, surname, username, password) VALUES($1, $2, $3, $4) RETURNING *'
-  const values = [req.body.name, req.body.surname, req.body.username, req.body.password]
-
-  try {
-    const response = await dbClient.query(queryText, values)
-    res.json({ response })
-  } catch (err) {
-    res.status(404).end()
-    console.log(err.stack)
-  }
-})
-
 router.delete('/:userId', async (req, res) => {
   const values = [req.params.userId]
   const queryText = 'DELETE FROM users WHERE id = $1'
