@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "docker",
+    "password": "secret",
+    "database": "riftterdb",
+    "host": "riftterdb",
+    "dialect": "postgres",
+    "quoteIdentifiers": false
+  },
+  "test": {
+    "username": "docker",
+    "password": "secret",
+    "database": "test_riftterdb",
+    "host": "localhost",
+    "dialect": "postgres",
+    "quoteIdentifiers": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
